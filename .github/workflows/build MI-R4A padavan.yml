@@ -1,12 +1,12 @@
 # 注意：修改 default:    中的型号为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build MI-R4A Padavan
+name:   k2p
 
 on:
   workflow_dispatch:
     inputs:
       production:
         description: 设置编译的固件型号,空格分隔.
-        default: "MI-R4A"
+        default: "k2p"
         required: false
       release:
         description: "是否需要发布到Release? (不发布也可以到Artifacts下载)"
@@ -81,9 +81,9 @@ jobs:
     - name: Build Firmware
       env:
         TNAME: "${{ github.event.inputs.production }}"
-        MHZ: 1120               # CPU超频频率 必须为20的倍数
+        MHZ: 1200               # CPU超频频率 必须为20的倍数
       run: |
-        cp -f public/MI-R4A.config ${{ env.DIR }}/trunk/configs/templates
+        cp -f public/k2p.config ${{ env.DIR }}/trunk/configs/templates
         cp -f public/adguardhome.sh ${{ env.DIR }}/trunk/user/adguardhome
         cwd=`pwd`
         CONFIG_TOOLCHAIN_DIR=${cwd//\//\\\/}\\/toolchain-mipsel
